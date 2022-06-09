@@ -48,7 +48,6 @@ end
 ---@param args neotest.RunArgs
 ---@return neotest.RunSpec | nil
 function adapter.build_spec(args)
-    logger.error("hello")
     local results_path = vim.fn.tempname() .. ".json"
     local tree = args.tree
     if not tree then
@@ -146,7 +145,7 @@ function adapter.results(spec, _, tree)
         logger.error("No test output file found ", output_file)
         return {}
     end
-    local ok, parsed = pcall(vim.json.decode, data({ luanil = { object = true } }))
+    local ok, parsed = pcall(vim.json.decode, data, { luanil = { object = true } })
     if not ok then
         logger.error("Failed to parse test output json ", output_file)
         return {}
