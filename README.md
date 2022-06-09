@@ -1,4 +1,4 @@
-# neotest-jest
+# neotest-vitest
 
 This plugin provides a vitest adapter for the [Neotest](https://github.com/rcarriga/neotest) framework.
 
