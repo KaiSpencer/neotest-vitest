@@ -126,20 +126,17 @@ local function getVitestConfig(path)
 end
 
 local function escapeTestPattern(s)
-  return (
-    s
-      :gsub("%(", "%\\(")
-      :gsub("%)", "%\\)")
-      :gsub("%]", "%\\]")
-      :gsub("%[", "%\\[")
-      :gsub("%*", "%\\*")
-      :gsub("%+", "%\\+")
-      :gsub("%-", "%\\-")
-      :gsub("%?", "%\\?")
-      :gsub("%$", "%\\$")
-      :gsub("%^", "%\\^")
-      :gsub("%/", "%\\/")
-  )
+  return s:gsub("%(", "%\\(")
+    :gsub("%)", "%\\)")
+    :gsub("%]", "%\\]")
+    :gsub("%[", "%\\[")
+    :gsub("%*", "%\\*")
+    :gsub("%+", "%\\+")
+    :gsub("%-", "%\\-")
+    :gsub("%?", "%\\?")
+    :gsub("%$", "%\\$")
+    :gsub("%^", "%\\^")
+    :gsub("%/", "%\\/")
 end
 
 ---@param args neotest.RunArgs
@@ -192,8 +189,7 @@ function adapter.build_spec(args)
 end
 
 local function cleanAnsi(s)
-  return s
-    :gsub("\x1b%[%d+;%d+;%d+;%d+;%d+m", "")
+  return s:gsub("\x1b%[%d+;%d+;%d+;%d+;%d+m", "")
     :gsub("\x1b%[%d+;%d+;%d+;%d+m", "")
     :gsub("\x1b%[%d+;%d+;%d+m", "")
     :gsub("\x1b%[%d+;%d+m", "")
