@@ -170,6 +170,7 @@ function adapter.build_spec(args)
   end
 
   for _, value in ipairs({
+    "--reporter=verbose",
     "--reporter=json",
     "--outputFile=" .. results_path,
     "--testNamePattern=" .. testNamePattern,
@@ -204,7 +205,7 @@ local function findErrorPosition(file, errStr)
   return errLine, errColumn
 end
 
-local function parsed_json_to_results(data, output_file)
+local function parsed_json_to_results(data, output_file, console_output)
   local tests = {}
 
   for _, testResult in pairs(data.testResults) do
@@ -236,7 +237,7 @@ local function parsed_json_to_results(data, output_file)
       tests[keyid] = {
         status = status,
         short = name .. ": " .. status,
-        output = output_file,
+        output = console_output,
         location = assertionResult.location,
       }
 
