@@ -150,10 +150,10 @@ function adapter.build_spec(args)
   end
 
   local pos = args.tree:data()
-  local testNamePattern = "'.*'"
+  local testNamePattern = ".*"
 
   if pos.type == "test" then
-    testNamePattern = "'" .. escapeTestPattern(pos.name:gsub("'", "")) .. "$'"
+    testNamePattern = escapeTestPattern(pos.name:gsub('"', "")) .. "$"
   end
 
   local binary = getVitestCommand(pos.path) or "vitest"
