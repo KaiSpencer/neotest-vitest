@@ -19,7 +19,10 @@ use({
     require('neotest').setup({
       ...,
       adapters = {
-        require('neotest-vitest'),
+        require('neotest-vitest')({
+          vitestCommand = "npm test --",
+          vitestConfigFile = "custom.vitest.config.ts",
+        }),
       }
     })
   end
@@ -30,3 +33,10 @@ use({
 
 See neotest's documentation for more information on how to run tests.
 
+## Development
+
+To trigger the tests for the adapter, run:
+
+```sh
+./scripts/test
+```
