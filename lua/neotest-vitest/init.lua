@@ -197,14 +197,6 @@ local function cleanAnsi(s)
     :gsub("\x1b%[%d+m", "")
 end
 
-local function findErrorPosition(file, errStr)
-  -- Look for: /path/to/file.js:123:987
-  local regexp = file:gsub("([^%w])", "%%%1") .. "%:(%d+)%:(%d+)"
-  local _, _, errLine, errColumn = string.find(errStr, regexp)
-
-  return errLine, errColumn
-end
-
 local function parsed_json_to_results(data, output_file, console_output)
   local tests = {}
 
@@ -224,7 +216,6 @@ local function parsed_json_to_results(data, output_file, console_output)
       for _, value in ipairs(assertionResult.ancestorTitles) do
         if value ~= "" then
           keyid = keyid .. "::" .. value
-          -- keyid = keyid .. "::" .. '"' .. name .. '"'
         end
       end
 
