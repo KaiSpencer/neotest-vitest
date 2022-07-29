@@ -1,4 +1,5 @@
 ---@diagnostic disable: undefined-field
+local async = require("neotest.async")
 local lib = require("neotest.lib")
 local logger = require("neotest.logging")
 local util = require("neotest-jest.util")
@@ -8,6 +9,8 @@ local adapter = { name = "neotest-vitest" }
 
 adapter.root = lib.files.match_root_pattern("package.json")
 
+---@param file_path? string
+---@return boolean
 function adapter.is_test_file(file_path)
   if file_path == nil then
     return false
@@ -82,6 +85,8 @@ function adapter.discover_positions(path)
   return lib.treesitter.parse_positions(path, query, { nested_tests = true })
 end
 
+---@param path string
+---@return string
 local function getVitestCommand(path)
   local rootPath = util.find_node_modules_ancestor(path)
   local vitestBinary = util.path.join(rootPath, "node_modules", ".bin", "vitest")
@@ -110,6 +115,8 @@ local config_files = {
 
 local vitestConfigPattern = util.root_pattern(config_files)
 
+---@param path string
+---@return string|nil
 local function getVitestConfig(path)
   local rootPath = vitestConfigPattern(path)
 
@@ -161,7 +168,7 @@ end
 ---@param args neotest.RunArgs
 ---@return neotest.RunSpec | nil
 function adapter.build_spec(args)
-  local results_path = vim.fn.tempname() .. ".json"
+  local results_path = async.fn.tempname() .. ".json"
   local tree = args.tree
 
   if not tree then
@@ -175,32 +182,26 @@ function adapter.build_spec(args)
     testNamePattern = escapeTestPattern(pos.name:gsub('"', "")) .. "$"
   end
 
-  local binary = getVitestCommand(pos.path) or "vitest"
+  local binary = getVitestCommand(pos.path)
   local config = getVitestConfig(pos.path) or "vite.config.ts"
-  local command = {}
-
-  -- split by whitespace
-  for w in binary:gmatch("%S+") do
-    table.insert(command, w)
-  end
+  local command = vim.split(binary, "%s+")
   if util.path.exists(config) then
     -- only use config if available
     table.insert(command, "--config=" .. config)
   end
 
-  for _, value in ipairs({
+  vim.list_extend(command, {
     "--reporter=verbose",
     "--reporter=json",
     "--outputFile=" .. results_path,
     "--testNamePattern=" .. testNamePattern,
     "--run",
     pos.path,
-  }) do
-    table.insert(command, value)
-  end
+  })
 
   return {
     command = command,
+    cwd = adapter.root(pos.path),
     context = {
       results_path = results_path,
       file = pos.path,
