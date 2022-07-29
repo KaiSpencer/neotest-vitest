@@ -1,5 +1,4 @@
-set rtp^=.
-  \,../plenary.nvim
-  \,../nvim-lspconfig
-  \,../nvim-treesitter
+set rtp+=.
+set rtp+=../plenary.nvim
+set rtp+=../nvim-treesitter
 runtime! plugin/plenary.vim
