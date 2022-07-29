@@ -165,6 +165,10 @@ local function get_strategy_config(strategy, command)
   end
 end
 
+local function get_env(spec_env)
+  return spec_env
+end
+
 ---@param args neotest.RunArgs
 ---@return neotest.RunSpec | nil
 function adapter.build_spec(args)
@@ -207,6 +211,7 @@ function adapter.build_spec(args)
       file = pos.path,
     },
     strategy = get_strategy_config(args.strategy, command),
+    env = get_env(args[2] and args[2].env or {}),
   }
 end
 
@@ -322,6 +327,13 @@ setmetatable(adapter, {
     elseif opts.vitestConfigFile then
       getVitestConfig = function()
         return opts.vitestConfigFile
+      end
+    end
+    if is_callable(opts.env) then
+      get_env = opts.env
+    elseif opts.env then
+      get_env = function(spec_env)
+        return vim.tbl_extend("force", opts.env, spec_env)
       end
     end
     return adapter
