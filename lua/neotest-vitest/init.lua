@@ -2,7 +2,7 @@
 local async = require("neotest.async")
 local lib = require("neotest.lib")
 local logger = require("neotest.logging")
-local util = require("neotest-jest.util")
+local util = require("neotest-vitest.util")
 
 ---@type neotest.Adapter
 local adapter = { name = "neotest-vitest" }
