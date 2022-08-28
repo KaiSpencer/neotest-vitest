@@ -1,6 +1,6 @@
 # neotest-vitest
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This plugin provides a vitest adapter for the [Neotest](https://github.com/rcarriga/neotest) framework.
@@ -54,6 +54,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/shiradofu"><img src="https://avatars.githubusercontent.com/u/43514606?v=4?s=100" width="100px;" alt=""/><br /><sub><b>しらどふ</b></sub></a><br /><a href="https://github.com/KaiSpencer/neotest-vitest/commits?author=shiradofu" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/KaiSpencer"><img src="https://avatars.githubusercontent.com/u/51139521?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kai Spencer</b></sub></a><br /><a href="https://github.com/KaiSpencer/neotest-vitest/commits?author=KaiSpencer" title="Code">💻</a> <a href="#maintenance-KaiSpencer" title="Maintenance">🚧</a> <a href="https://github.com/KaiSpencer/neotest-vitest/commits?author=KaiSpencer" title="Documentation">📖</a></td>
   </tr>
 </table>
 
