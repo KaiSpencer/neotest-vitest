@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "shiradofu",
+      "name": "しらどふ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43514606?v=4",
+      "profile": "https://github.com/shiradofu",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "neotest-vitest",
+  "projectOwner": "KaiSpencer",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
