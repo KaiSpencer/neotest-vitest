@@ -25,6 +25,7 @@ use({
         require('neotest-vitest')({
           vitestCommand = "npm test --",
           vitestConfigFile = "custom.vitest.config.ts",
+          env = { CI = true },
         }),
       }
     })
